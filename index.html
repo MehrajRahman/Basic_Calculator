@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Calculator</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <main>
+        <div class="main-body">
+            <div id="screen-box">
+                <div id="screen" class="screen">
+                    <p>00</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 digit-box">
+                    <div id="box-1" class="box">
+                        1
+                    </div>
+                    <div id="box-2" class="box">
+                        <p>2</p>
+                    </div>
+                    <div id="box-3" class="box">
+                        <p>3</p>
+                    </div>
+                    <div id="box-4" class="box">
+                        <p>4</p>
+                    </div>
+                    <div id="box-5" class="box">
+                        <p>5</p>
+                    </div>
+                    <div id="box-6" class="box">
+                        <p>6</p>
+                    </div>
+                    <div id="box-7" class="box">
+                        <p>7</p>
+                    </div>
+                    <div id="box-8" class="box">
+                        <p>8</p>
+                    </div>
+                    <div id="box-9" class="box">
+                        <p>9</p>
+                    </div>
+                    <div id="box-0" class="box">
+                        0
+                    </div>
+                    <div id="box-ac" class="box">
+                        AC
+                    </div>
+                    <div id="box-off" class="box">
+                        OFF
+                    </div>
+                    <div id="box-on" class="box box-on">
+                        ON
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="plus" class="box">+</div>
+                    <div id="minus" class="box">-</div>
+                    <div id="into" class="box">*</div>
+                    <div id="divide" class="box">/</div>
+                    <div id="equal" class="box">=</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script>
+        let result ;
+        let screenChanged = "";
+        let onOff = 1;
+
+        const totalOff = document.getElementById("box-off");
+        totalOff.addEventListener("click", function off(){
+            document.getElementById("screen").style.display = "none";
+            document.getElementById("box-off").style.display = "none";
+            document.getElementById("box-on").style.display = "block";
+            onOff = 0;
+            return onOff;
+        });
+        const totalOn = document.getElementById("box-on");
+        totalOn.addEventListener("click", function(){
+            document.getElementById("screen").style.display = "block";
+            document.getElementById("box-off").style.display = "block";
+            document.getElementById("box-on").style.display = "none";
+
+            /*all thing will stay here*/
+                        const one =  document.getElementById("box-1");
+                one.addEventListener("click",function(){
+                    getTheInnerElement("box-1");
+                });
+                const two =  document.getElementById("box-2");
+                two.addEventListener("click", function(){
+                    getTheInnerElement("box-2");
+                });
+                const three =  document.getElementById("box-3");
+                three.addEventListener("click", function(){
+                    getTheInnerElement("box-3");
+                });
+                const four =  document.getElementById("box-4");
+                four.addEventListener("click", function(){
+                    getTheInnerElement("box-4");
+                });
+                const five =  document.getElementById("box-5");
+                five.addEventListener("click", function(){
+                    getTheInnerElement("box-5");
+                });
+                const six =  document.getElementById("box-6");
+                six.addEventListener("click", function(){
+                    getTheInnerElement("box-6");
+                });
+                const seven =  document.getElementById("box-7");
+                seven.addEventListener("click", function(){
+                    getTheInnerElement("box-7");
+                });
+                const eight =  document.getElementById("box-8");
+                eight.addEventListener("click", function(){
+                    getTheInnerElement("box-8");
+                });
+                const nine =  document.getElementById("box-9");
+                nine.addEventListener("click", function(){
+                    getTheInnerElement("box-9");
+                });
+                const zero =  document.getElementById("box-0");
+                zero.addEventListener("click", function(){
+                    getTheInnerElement("box-0");
+                });
+                const plus =  document.getElementById("plus");
+                plus.addEventListener("click", function(){
+                    getTheInnerElementOperator("plus");
+                });
+                const minus =  document.getElementById("minus");
+                minus.addEventListener("click", function(){
+                    getTheInnerElementOperator("minus");
+                });
+                const into =  document.getElementById("into");
+                into.addEventListener("click", function(){
+                    getTheInnerElementOperator("into");
+                });
+                const divide =  document.getElementById("divide");
+                divide.addEventListener("click", function(){
+                    getTheInnerElementOperator("divide");
+                });
+                
+                const equal = document.getElementById("equal");
+                equal.addEventListener("click", function(){
+                    let arr = screenChanged.split(" ");
+                    
+                    console.log(arr);            
+                        if(arr[1] == "+"){
+                            result = 0;
+                            for(let i = 0;i<arr.length;i++){
+                                if(arr[i] != "+"){
+                                    let value = parseFloat(arr[i])
+                                    result = result + value;
+                                }
+                            };
+                            document.getElementById("screen").innerText = result;
+                        }
+                        else if(arr[1] == "-"){
+                            result = parseInt(arr[0]);
+                            for(let i = 0;i<arr.length;i++){
+                                if(arr[i] != "-" && i != 0){
+                                    let value = parseFloat(arr[i])
+                                    result = result - value;
+                                }
+                            };
+                            document.getElementById("screen").innerText = result;
+
+                        }
+                        else if(arr[1] == "*"){
+                            result = 1;
+                            for(let i = 0;i<arr.length;i++){
+                                if(arr[i] != "*" ){
+                                    let value = parseFloat(arr[i])
+                                    result = result * value;
+                                }
+                            };
+                            document.getElementById("screen").innerText = result;
+                            
+                        }
+                        else if(arr[1] == "/"){
+                            result = parseInt(arr[0]);
+                            for(let i = 0;i<arr.length;i++){
+                                if(arr[i] != "/"  && i != 0){
+                                    let value = parseFloat(arr[i])
+                                    result = result / value;
+                                }
+                            };
+                            document.getElementById("screen").innerText = result;
+
+                            
+                        }
+
+                });
+            
+            const allClear =  document.getElementById("box-ac");
+            allClear.addEventListener("click", function(){
+                document.getElementById("screen").innerText = "00";
+                screenChanged = ""; 
+
+            })
+            
+        
+            // will display all the digit which has been clicked
+            function getTheInnerElement(id){
+                const letter = document.getElementById(id).innerText;           
+                // let screen = document.getElementById("screen").innerText;
+                screenChanged = screenChanged + letter;
+            
+                document.getElementById("screen").innerText = screenChanged   ;
+                letterNumber = parseInt(letter);
+
+            };
+            //will display all the operator with spacing after clicked
+            function getTheInnerElementOperator(id){
+                const letter = document.getElementById(id).innerText;           
+                // let screen = document.getElementById("screen").innerText
+                screenChanged = screenChanged +" " + letter+ " ";        
+                document.getElementById("screen").innerText = screenChanged   ;
+                letterNumber = parseInt(letter);
+
+            };
+            
+
+        });
+        
+       
+
+
+        
+
+    </script>
+    
+</body>
+</html>
